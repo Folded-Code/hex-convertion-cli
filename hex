@@ -1,0 +1,32 @@
+#!/usr/bin/python2.7
+import sys
+
+def get_usage():
+	return """Usage: hex [hex] [options]
+options: -a (ascii to hex)"""
+
+def hex_to_ascii(hex):
+	try:
+		return chr(hex)
+	except:
+		return 'None'
+def ascii_to_hex(char):
+	return hex(ord(char))
+
+def main():
+	if len(sys.argv) == 1:
+		print(get_usage())
+	else:
+		try:
+			inHex = int(sys.argv[1], 16)
+			if sys.argv[1][1] == 'x':
+				print('ascii: ' + hex_to_ascii(inHex) + ' Decimal: ' + str(int(inHex)))
+			else:
+				raise ValueError('m')
+		except:
+			try:
+				if sys.argv[2] == '-a':
+					print('hex: ' + ascii_to_hex(sys.argv[1]) + ' Decimal: ' + str(int(int(ascii_to_hex(sys.argv[1]), 16))))
+			except:
+				print(get_usage())
+main()
