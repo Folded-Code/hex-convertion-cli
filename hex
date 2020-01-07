@@ -3,15 +3,18 @@ import sys
 
 def get_usage():
 	return """Usage: hex [hex] [options]
-options: -a (ascii to hex)"""
+options: -a (ascii to hex), -i (base 10 to hex)"""
 
 def hex_to_ascii(hex):
-	try:
+	# try:
 		return chr(hex)
-	except:
-		return 'None'
+	# except:
+		# return 'None'
 def ascii_to_hex(char):
 	return hex(ord(char))
+
+def int_to_hex(i):
+	return hex(i)
 
 def main():
 	if len(sys.argv) == 1:
@@ -19,14 +22,18 @@ def main():
 	else:
 		try:
 			inHex = int(sys.argv[1], 16)
-			if sys.argv[1][1] == 'x':
-				print('ascii: ' + hex_to_ascii(inHex) + ' Decimal: ' + str(int(inHex)))
+			if sys.argv[1][1] == 'x' and len(sys.argv) == 2:
+				print('Ascii: ' + hex_to_ascii(inHex) + ' Decimal: ' + str(int(inHex)))
 			else:
 				raise ValueError('m')
 		except:
 			try:
 				if sys.argv[2] == '-a':
-					print('hex: ' + ascii_to_hex(sys.argv[1]) + ' Decimal: ' + str(int(int(ascii_to_hex(sys.argv[1]), 16))))
+					print('Hex: ' + ascii_to_hex(sys.argv[1]) + ' Decimal: ' + str(int(int(ascii_to_hex(sys.argv[1]), 16))))
+				elif sys.argv[2] == '-i':
+					print('Hex: ' + int_to_hex(int(sys.argv[1])) + ' Ascii: ' + hex_to_ascii(int(sys.argv[1])))
+				else:
+					print(get_usage())
 			except:
 				print(get_usage())
 main()
